@@ -3,5 +3,9 @@ module.exports = {
     title: `portfolio`,
     siteUrl: `https://www.yourdomain.tld`
   },
-  plugins: ["gatsby-plugin-sitemap"]
+  plugins: [
+    "gatsby-plugin-sitemap",
+    "gatsby-plugin-image",
+    "gatsby-plugin-sharp"
+  ]
 };
