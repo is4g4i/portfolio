@@ -1,6 +1,7 @@
 module.exports = {
   siteMetadata: {
-    title: `Saga's Portfolio`
+    title: `Saga's Portfolio`,
+    siteUrl: `https://portfolio55026.gtsb.io/`
   },
   plugins: [
     "gatsby-plugin-sitemap",
