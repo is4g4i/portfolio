@@ -1,8 +1,6 @@
 import * as React from "react"
-import PageContainer from "../components/pageContainer/pageContainer"
 import Layout from "../components/layout/layout"
 import { StaticImage } from 'gatsby-plugin-image'
-import { Link } from 'gatsby'
 import { pageStyles } from "../styles/styles"
 
 const IndexPage = () => {
