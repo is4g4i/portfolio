@@ -1,0 +1,29 @@
+.container {
+  display: flex;
+  margin: 0 auto;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.navContainer {
+  width: 100%;
+  height: 100px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.navLinks {
+  display: flex;
+  list-style: none;
+  padding-left: 0;
+}
+
+.navLinkItem {
+  padding-right: 2rem;
+}
+
+.navLinkText {
+  color: white;
+  text-transform: lowercase;
+  text-decoration: none;
+}

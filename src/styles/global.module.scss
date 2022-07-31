@@ -1,0 +1,18 @@
+@import './font.module.scss';
+@import './colors.module.scss';
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    background-color: #080f45;
+
+    body {
+        color: $white;
+        font-family: $bodyText;
+        height: 100vh;
+    }
+}
