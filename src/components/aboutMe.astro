@@ -1,0 +1,48 @@
+---
+import { Icon } from "astro-icon";
+import ContentSection from "~/components/content-section.astro";
+import type { FeatureItem } from "~/types";
+
+const features: Array<FeatureItem> = [
+  {
+    title: "A11Y",
+    description:
+      "Web Accessibility is a feature that I like to apply in my daily job. For me I like to create applications that are accessible for everyone",
+    icon: "mdi:handshake",
+  },
+  {
+    title: "JS Mainly",
+    description:
+      "Almost all my experience has being in Javascript, as is one of the languages in most demand in the market.",
+    icon: "mdi:graph",
+  },
+  {
+    title: "UI/UX Design and Tech/Cloud",
+    description:
+      "Im also an enthusiast in UI/UX design, i like to create stuff in Figma, but also love to learn stuff in other technologies, cloud, etc.",
+    icon: "mdi:directions-fork",
+  }
+];
+---
+
+<ContentSection title="About me" id="aboutme">
+  <Fragment slot="lead">
+    Greetings, Im a <span class="text-primary">Web developer</span> and also a
+    <span class="text-primary">UI/UX Designer</span>. <br/><br/>
+    With 4+ years of experience in multiple <span class="text-primary">Javascript</span> frameworks and tech stacks 
+    with a strong focus on <span class="text-primary">A11y</span>.
+  </Fragment>
+  <ul class="grid max-w-6xl grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+    {
+      features.map(({ title, description, icon }) => (
+        <li class="flex flex-col items-center gap-4 border border-default bg-offset p-6">
+          <div class="h-16 w-16 rounded-full border-2 border-current p-3">
+            <Icon name={icon} />
+          </div>
+          <p class="text-center font-extrabold text-xl">{title}</p>
+          <p class="text-center text-offset text-sm">{description}</p>
+        </li>
+      ))
+    }
+  </ul>
+</ContentSection>
