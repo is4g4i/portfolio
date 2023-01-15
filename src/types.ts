@@ -1,4 +1,4 @@
-export interface CompatibilityItem {
+export interface TechnologyItem {
   icon: string;
   title: string;
   url: string;
@@ -6,7 +6,6 @@ export interface CompatibilityItem {
 
 export interface FeatureItem {
   description: string;
-  icon: string;
   title: string;
 }
 
@@ -21,8 +20,9 @@ export interface NavItem {
   url: string;
 }
 
-export interface ShowcaseSite {
+export interface Project {
   title: string;
   image: ImageMetadata;
   url: string;
+  technologies: string;
 }

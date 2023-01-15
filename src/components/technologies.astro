@@ -1,0 +1,134 @@
+---
+import TechnologiesList from "~/components/technologies-list.astro";
+import ContentSection from "~/components/content-section.astro";
+import type { TechnologyItem } from "~/types";
+
+const frameworks: Array<TechnologyItem> = [
+  {
+    title: "Next",
+    icon: "frameworks/nextjs",
+    url: "https://nextjs.org/",
+  },
+  {
+    title: "Astro",
+    icon: "frameworks/astro",
+    url: "https://astro.build/",
+  },
+  {
+    title: "Gatsby",
+    icon: "frameworks/gatsby",
+    url: "https://www.gatsbyjs.com/",
+  },
+  {
+    title: "Angular",
+    icon: "frameworks/angular",
+    url: "https://angular.io/",
+  },
+];
+
+const libraries: Array<TechnologyItem> = [
+  {
+    title: "React",
+    icon: "libraries/react",
+    url: "https://reactjs.org/",
+  },
+  {
+    title: "Redux",
+    icon: "libraries/redux",
+    url: "https://redux.js.org/",
+  },
+  {
+    title: "Storybook",
+    icon: "libraries/storybook",
+    url: "https://redux.js.org/",
+  },
+];
+
+const styling: Array<TechnologyItem> = [
+  {
+    title: "Sass",
+    icon: "styling/sass",
+    url: "https://redux.js.org/",
+  },
+  {
+    title: "Material UI",
+    icon: "styling/mui",
+    url: "https://reactjs.org/",
+  },
+  {
+    title: "AntDesign",
+    icon: "styling/antd",
+    url: "https://redux.js.org/",
+  },
+  {
+    title: "Tailwind",
+    icon: "styling/tailwind",
+    url: "https://redux.js.org/",
+  },
+];
+
+
+const cms: Array<TechnologyItem> = [
+  {
+    title: "Strapi",
+    icon: "cms/strapi",
+    url: "https://redux.js.org/",
+  },
+  {
+    title: "Keystone",
+    icon: "cms/keystone",
+    url: "https://reactjs.org/",
+  },
+  {
+    title: "Wordpress",
+    icon: "cms/wordpress",
+    url: "https://wordpress.com/es/",
+  },
+  {
+    title: "Dato",
+    icon: "cms/dato",
+    url: "https://www.datocms.com/",
+  },
+];
+
+
+const platforms: Array<TechnologyItem> = [
+  {
+    title: "Netlify",
+    icon: "platforms/netlify",
+    url: "https://www.netlify.com/",
+  },
+  {
+    title: "Vercel",
+    icon: "platforms/vercel",
+    url: "https://vercel.com/",
+  },
+  {
+    title: "Amazon",
+    icon: "platforms/aws",
+    url: "https://aws.amazon.com/",
+  },
+  {
+    title: "Azure",
+    icon: "platforms/azure",
+    url: "https://render.com/",
+  },
+  {
+    title: "GitHub",
+    icon: "platforms/github",
+    url: "https://pages.github.com/",
+  },
+];
+---
+
+<ContentSection title="Technologies" id="technologies">
+  <Fragment slot="lead">
+    Here are some of the <span class="text-primary">technologies</span> I have previosly
+    work with:
+  </Fragment>
+  <TechnologiesList items={libraries} title="Libraries" />
+  <TechnologiesList items={frameworks} title="Frameworks" />
+  <TechnologiesList items={styling} title="Styling" />
+  <TechnologiesList items={cms} title="CMS" />
+  <TechnologiesList items={platforms} title="Platforms" />
+</ContentSection>
