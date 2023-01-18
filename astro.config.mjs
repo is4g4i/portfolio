@@ -5,7 +5,7 @@ import { defineConfig } from "astro/config";
 // https://astro.build/config
 export default defineConfig({
   site: "https://is4g4i.github.io",
-  base: '/my-repo',
+  base: '/portfolio',
   integrations: [
     tailwind(),
     image({
