@@ -1,32 +1,32 @@
 [
   {
-    "title": "PoliNations",
-    "image": "./images/polinations.png",
-    "url": "https://polinations.com/"
+    "title": "WD-40",
+    "image": "./images/wd40.png",
+    "url": "https://wd40.com/"
   },
   {
-    "title": "Astro Docs",
-    "image": "./images/astro-docs.png",
-    "url": "https://docs.astro.build/"
+    "title": "Siva Ashram",
+    "image": "./images/siva.png",
+    "url": "https://sivaashram.org/"
   },
   {
-    "title": "<div>RIOTS",
-    "image": "./images/divriots.png",
-    "url": "https://divriots.com/"
+    "title": "Provivi",
+    "image": "./images/provivi.png",
+    "url": "https://www.provivi.com/"
   },
   {
-    "title": "Designcember",
-    "image": "./images/designcember.png",
-    "url": "https://designcember.com/"
+    "title": "Fresh Start Women",
+    "image": "./images/fsw.png",
+    "url": "https://www.freshstartwomen.org/"
   },
   {
-    "title": "The Firebase Blog",
-    "image": "./images/firebase-blog.png",
-    "url": "https://firebase.blog/"
+    "title": "Outside Counsel Search",
+    "image": "./images/osc.png",
+    "url": "https://www.outsidecounselsearch.com/"
   },
   {
-    "title": "Corset",
-    "image": "./images/corset.png",
-    "url": "https://corset.dev/"
+    "title": "Halo Costa Rica",
+    "image": "./images/hcr.png",
+    "url": "https://halo-costarica.com/"
   }
 ]

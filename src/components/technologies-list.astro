@@ -1,14 +1,13 @@
 ---
 import { Icon } from "astro-icon";
-import type { CompatibilityItem } from "~/types";
+import type { TechnologyItem } from "~/types";
 
 export interface Props {
-  items: Array<CompatibilityItem>;
+  items: Array<TechnologyItem>;
   title: string;
-  url: string;
 }
 
-const { items, title, url } = Astro.props;
+const { items, title } = Astro.props;
 ---
 
 <div class="w-full max-w-6xl space-y-2">
@@ -18,7 +17,7 @@ const { items, title, url } = Astro.props;
     >
       {title}
     </h3>
-    <ul class="grid grid-cols-2 gap-8 sm:grid-cols-3 md:grid-cols-6">
+    <ul class="grid grid-cols-2 gap-8 sm:grid-cols-3 md:grid-cols-6 place-items-center">
       {
         items.map((item) => (
           <li>
@@ -31,7 +30,4 @@ const { items, title, url } = Astro.props;
       }
     </ul>
   </div>
-  <p class="text-right text-sm">
-    <a class="text-primary" href={url}> ...and more &rarr;</a>
-  </p>
 </div>
