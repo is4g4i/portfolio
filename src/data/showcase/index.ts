@@ -1,6 +1,6 @@
 // adapted from https://github.com/withastro/astro.build/blob/112bdc723b3ba305997c95d7ce02304624d0d3ce/src/data/showcase/index.ts
 
-import type { Project } from "~/types";
+import type { Project } from "../../types";
 import sitesData from "./sites.json";
 
 const allImages = import.meta.glob<ImageMetadata>("./images/*.{png,jpg,jpeg}", {

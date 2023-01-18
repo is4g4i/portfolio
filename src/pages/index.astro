@@ -1,15 +1,16 @@
 ---
 import "@fontsource/inter/variable.css";
-import Technologies from "~/components/technologies.astro";
-import Aboutme from "~/components/aboutme.astro";
-import Footer from "~/components/footer.astro";
-import Header from "~/components/header.astro";
-import Projects from "~/components/projects.astro";
-import Splash from "~/components/splash.astro";
-import "~/styles/index.css";
+import Technologies from "../components/technologies.astro";
+import Aboutme from "../components/aboutme.astro";
+import Footer from "../components/footer.astro";
+import Header from "../components/header.astro";
+import Projects from "../components/projects.astro";
+import Splash from "../components/splash.astro";
+import "../styles/index.css";
 
 const { generator, site } = Astro;
-const image = new URL("social.jpg", site);
+const image = new URL("social.png", site);
+const siteTitle = "Saga Portfolio"
 const description =
   "Welcome to my personal Portfolio, Im Ricardo aka Saga im a web developer";
 ---
@@ -19,14 +20,14 @@ const description =
   <head>  
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/portfolio/favicon.svg" type="image/svg+xml" />
     <meta name="generator" content={generator} />
 
-    <title>Astro Landing Page</title>
+    <title>{siteTitle}</title>
     <meta name="description" content={description} />
 
     <!-- social media -->
-    <meta property="og:title" content="Saga Portfolio" />
+    <meta property="og:title" content={siteTitle} />
     <meta property="og:type" content="website" />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={image} />
@@ -63,7 +64,6 @@ const description =
     <Header />
     <Splash />
     <div class="space-y-24 px-8 py-32">
-      <hr/>
       <Aboutme />
       <Technologies />
       <Projects />
