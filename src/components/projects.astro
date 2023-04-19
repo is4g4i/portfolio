@@ -3,7 +3,7 @@ import ContentSection from "./content-section.astro";
 import ShowcaseCard from "./showcase-card.astro";
 import { getShowcase } from "../data/showcase";
 
-const sites = await getShowcase();
+const sites = await getShowcase('projects');
 ---
 
 <ContentSection title="Projects" id="projects">

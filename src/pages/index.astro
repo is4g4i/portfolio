@@ -5,19 +5,20 @@ import About from "../components/about.astro";
 import Footer from "../components/footer.astro";
 import Header from "../components/header.astro";
 import Projects from "../components/projects.astro";
+import Designs from "../components/designs.astro";
 import Splash from "../components/splash.astro";
 import "../styles/index.css";
 
 const { generator, site } = Astro;
 const image = new URL("social.png", site);
-const siteTitle = "Saga Portfolio"
+const siteTitle = "Saga Portfolio";
 const description =
   "Welcome to my personal Portfolio, Im Ricardo aka Saga im a web developer";
 ---
 
 <!DOCTYPE html>
 <html lang="en" class="h-full motion-safe:scroll-smooth" data-theme="dark">
-  <head>  
+  <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" href="/portfolio/favicon.svg" type="image/svg+xml" />
@@ -67,6 +68,7 @@ const description =
       <About />
       <Technologies />
       <Projects />
+      <Designs />
     </div>
     <Footer />
   </body>
