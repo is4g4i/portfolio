@@ -21,7 +21,7 @@ const { items, title } = Astro.props;
       {
         items.map((item) => (
           <li>
-            <a class="flex flex-col items-center gap-2" href={item.url}>
+            <a class="flex flex-col items-center gap-2" href={item.url} target="_blank">
               <Icon class="h-12" name={item.icon} />
               <span>{item.title}</span>
             </a>
