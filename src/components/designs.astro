@@ -1,0 +1,21 @@
+---
+import ContentSection from "./content-section.astro";
+import ShowcaseCard from "./showcase-card.astro";
+import { getShowcase } from "../data/showcase";
+
+const sites = await getShowcase('designs');
+---
+
+<ContentSection title="Designs" id="Designs">
+  <Fragment slot="lead">
+    Check some of the <span class="text-primary">designs</span> I have worked on.
+  </Fragment>
+  <div class="max-w-6xl space-y-2">
+    <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+      {sites.map((site) => <ShowcaseCard site={site} />)}
+    </div>
+    <p class="text-right text-sm">
+      ...not so many cause I'm mainly a developer :P
+    </p>
+  </div>
+</ContentSection>
