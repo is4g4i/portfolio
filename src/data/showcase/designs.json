@@ -1,0 +1,12 @@
+[
+  {
+    "title": "Halo Costa Rica",
+    "image": "./images/hcr.png",
+    "url": "https://halo-costarica.com/"
+  },
+  {
+    "title": "Ascatur",
+    "image": "./images/ascatur.png",
+    "url": "https://ascatur-fe.vercel.app/"
+  }
+]
