@@ -10,24 +10,20 @@ const navItems: Array<NavItem> = [
 ];
 ---
 
-<header
-  id="page-header"
-  class="absolute bottom-0 z-20 flex w-full items-center justify-between border-b border-transparent px-8 py-4 text-white"
->
-  <a class="flex items-center gap-3 hover:!text-default" href="#">
-    <span class="sr-only">Saga Portfolio home</span>
-    <Icon name="logomark" class="h-10" />
-  </a>
-  <div>
-    <div class="flex items-center gap-6">
-      <nav class="hidden sm:block">
-        <ul class="flex items-center gap-6">
+<header id="page-header" class="site-header">
+  <div class="header-shell">
+    <a class="home-link" href="#">
+      <span class="sr-only">Saga Portfolio home</span>
+      <Icon name="logomark" class="h-9" />
+    </a>
+
+    <div class="header-controls">
+      <nav class="desktop-nav" aria-label="Primary navigation">
+        <ul>
           {
             navItems.map(({ title, url }) => (
               <li>
-                <a class="text-sm" href={url}>
-                  {title}
-                </a>
+                <a href={url}>{title}</a>
               </li>
             ))
           }
@@ -36,36 +32,48 @@ const navItems: Array<NavItem> = [
       <button
         id="open-nav-button"
         type="button"
-        class="btn sm:hidden"
-        aria-label="Navigation"
+        class="nav-button"
+        aria-label="Open navigation"
+        aria-controls="menu-modal"
+        aria-expanded="false"
       >
         <Icon pack="mdi" name="menu" class="h-8" />
       </button>
       <ThemeSwitcher />
     </div>
-    <div id="menu-modal" class="modal hidden" aria-hidden="true">
-      <div class="fixed inset-0 bg-default px-8 py-4 text-default">
-        <div class="space-y-4" role="dialog" aria-modal="true">
-          <header class="text-right">
+
+    <div id="menu-modal" class="modal" aria-hidden="true">
+      <div class="menu-overlay" data-micromodal-close>
+        <div
+          class="menu-panel"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="mobile-nav-title"
+        >
+          <div class="menu-panel-header">
+            <div>
+              <p class="menu-kicker">Navigation</p>
+              <h2 id="mobile-nav-title">Explore the portfolio</h2>
+            </div>
             <button
               id="close-nav-button"
               type="button"
-              class="btn"
+              class="nav-button"
               aria-label="Close navigation"
             >
               <Icon pack="mdi" name="close" class="h-8" />
             </button>
-          </header>
-          <div class="flex justify-center">
-            <Icon name="logomark" class="h-16" />
           </div>
-          <nav>
-            <ul class="flex flex-col">
+
+          <nav aria-label="Mobile navigation">
+            <ul class="mobile-nav-list">
               {
-                navItems.map(({ title, url }) => (
+                navItems.map(({ title, url }, index) => (
                   <li>
-                    <a class="block py-4 text-center text-xl" href={url}>
-                      {title}
+                    <a href={url}>
+                      <span>{String(index + 1).padStart(2, "0")}</span>
+                      <strong>{title}</strong>
+                      <span aria-hidden="true">↘</span>
                     </a>
                   </li>
                 ))
@@ -85,18 +93,25 @@ const navItems: Array<NavItem> = [
   const menuModalId = "menu-modal";
 
   const header = document.querySelector("#page-header") as HTMLElement;
-  const page = document.documentElement;
+  const hero = document.querySelector(".hero-v2") as HTMLElement;
   const menu = document.querySelector(`#${menuModalId} ul`);
-  const openNavButton = document.querySelector("#open-nav-button");
+  const openNavButton = document.querySelector(
+    "#open-nav-button"
+  ) as HTMLButtonElement;
   const closeNavButton = document.querySelector("#close-nav-button");
 
   invariant(header, "header should not be null");
+  invariant(hero, "hero should not be null");
   invariant(menu, "menu should not be null");
   invariant(openNavButton, "openNavButton should not be null");
   invariant(closeNavButton, "closeNavButton should not be null");
 
   const openMenu = () => {
-    MicroModal.show(menuModalId, { disableScroll: true });
+    MicroModal.show(menuModalId, {
+      disableScroll: true,
+      onShow: () => openNavButton.setAttribute("aria-expanded", "true"),
+      onClose: () => openNavButton.setAttribute("aria-expanded", "false"),
+    });
   };
 
   const closeMenu = () => {
@@ -106,13 +121,29 @@ const navItems: Array<NavItem> = [
   openNavButton.addEventListener("click", openMenu);
   closeNavButton.addEventListener("click", closeMenu);
 
-  document.addEventListener("scroll", () => {
-    const d = page.clientHeight - page.scrollTop - header.offsetHeight;
-    header.classList.toggle("fixed-header", d < 0);
-  });
+  let ticking = false;
+
+  const updateHeader = () => {
+    const heroBottom = hero.getBoundingClientRect().bottom;
+    header.classList.toggle("fixed-header", heroBottom <= header.offsetHeight);
+    ticking = false;
+  };
+
+  document.addEventListener(
+    "scroll",
+    () => {
+      if (!ticking) {
+        window.requestAnimationFrame(updateHeader);
+        ticking = true;
+      }
+    },
+    { passive: true }
+  );
+
+  updateHeader();
 
   menu.addEventListener("click", (event) => {
-    if ((event.target as HTMLElement).tagName === "A") {
+    if ((event.target as HTMLElement).closest("a")) {
       closeMenu();
     }
   });
@@ -127,11 +158,192 @@ const navItems: Array<NavItem> = [
 </noscript>
 
 <style>
-  .fixed-header {
-    @apply fixed top-0 bottom-auto;
-    @apply border-default bg-default text-default;
+  .site-header {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 50;
+    border-bottom: 1px solid rgb(148 163 184 / 18%);
+    background: rgb(5 7 13 / 82%);
+    color: #f8fafc;
+    backdrop-filter: blur(1rem);
+    transition: background-color 180ms ease, border-color 180ms ease,
+      color 180ms ease, box-shadow 180ms ease;
   }
+
+  .header-shell {
+    display: flex;
+    width: min(100% - 2rem, 80rem);
+    min-height: 4.5rem;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-inline: auto;
+  }
+
+  .home-link,
+  .nav-button {
+    display: grid;
+    width: 3rem;
+    height: 3rem;
+    flex: 0 0 auto;
+    place-items: center;
+    color: currentColor;
+  }
+
+  .home-link:hover,
+  .nav-button:hover {
+    color: #7dd3fc;
+  }
+
+  .header-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .desktop-nav {
+    display: none;
+  }
+
+  .fixed-header {
+    border-color: var(--color-border);
+    background: color-mix(in srgb, var(--color-background) 92%, transparent);
+    color: var(--color-text);
+    box-shadow: 0 0.75rem 2.5rem rgb(2 6 23 / 12%);
+  }
+
+  .modal {
+    display: none;
+  }
+
   .modal.is-open {
-    @apply block;
+    display: block;
+  }
+
+  .menu-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: grid;
+    padding: 0.75rem;
+    background: rgb(2 6 23 / 78%);
+    place-items: start end;
+  }
+
+  .menu-panel {
+    width: min(100%, 27rem);
+    min-height: calc(100dvh - 1.5rem);
+    overflow-y: auto;
+    border: 1px solid var(--color-border);
+    border-radius: 0.75rem;
+    padding: 1.25rem;
+    background: var(--color-background);
+    color: var(--color-text);
+    box-shadow: 0 2rem 6rem rgb(2 6 23 / 38%);
+  }
+
+  .menu-panel-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    border-bottom: 1px solid var(--color-border);
+    padding-bottom: 1.5rem;
+  }
+
+  .menu-kicker {
+    color: var(--color-primary);
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .menu-panel h2 {
+    margin-top: 0.5rem;
+    font-size: 1.5rem;
+    font-weight: 800;
+    letter-spacing: -0.04em;
+  }
+
+  .mobile-nav-list {
+    display: grid;
+    margin-top: 1rem;
+  }
+
+  .mobile-nav-list a {
+    display: grid;
+    min-height: 5.25rem;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 1rem;
+    border-bottom: 1px solid var(--color-border);
+    color: var(--color-text);
+    text-decoration: none;
+  }
+
+  .mobile-nav-list a > span {
+    color: var(--color-primary);
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .mobile-nav-list a > span:last-child {
+    font-size: 1rem;
+  }
+
+  .mobile-nav-list strong {
+    font-size: 1.15rem;
+    font-weight: 750;
+  }
+
+  @media (min-width: 900px) {
+    .site-header:not(.fixed-header) {
+      position: absolute;
+      top: auto;
+      bottom: 0;
+      border-top: 1px solid transparent;
+      border-bottom-color: transparent;
+      background: transparent;
+      backdrop-filter: none;
+    }
+
+    .header-shell {
+      width: min(100% - 3rem, 80rem);
+    }
+
+    .desktop-nav {
+      display: block;
+    }
+
+    .desktop-nav ul {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .desktop-nav a {
+      display: flex;
+      min-height: 2.75rem;
+      align-items: center;
+      padding-inline: 0.75rem;
+      color: currentColor;
+      font-size: 0.82rem;
+      font-weight: 650;
+      text-decoration: none;
+    }
+
+    .nav-button {
+      display: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .site-header {
+      transition: none;
+    }
   }
 </style>
