@@ -1,0 +1,593 @@
+---
+import { Picture } from "@astrojs/image/components";
+import doggo from "../assets/doggo1white.png";
+import GitHubCorner from "./github-corner.astro";
+
+const widths = [450, 800];
+const sizes = "(min-width: 1024px) 34vw, (min-width: 640px) 42vw, 72vw";
+
+const credentials = [
+  { value: "8+", label: "Years creating" },
+  { value: "AWS", label: "AI Practitioner" },
+  { value: "A11Y", label: "Consultant" },
+];
+---
+
+<section class="hero-v2" aria-labelledby="hero-title">
+  <GitHubCorner />
+
+  <div class="hero-grid" aria-hidden="true"></div>
+  <div class="hero-glow hero-glow-primary" aria-hidden="true"></div>
+  <div class="hero-glow hero-glow-secondary" aria-hidden="true"></div>
+
+  <div class="hero-layout">
+    <div class="hero-copy">
+      <p class="hero-eyebrow">
+        <span class="hero-eyebrow-dot" aria-hidden="true"></span>
+        Web developer · Cloud specialist · A11Y consultant
+      </p>
+
+      <h1 id="hero-title" class="hero-title">
+        <span class="hero-title-line">Building the web</span>
+        <span class="hero-title-line hero-title-accent">for every human.</span>
+      </h1>
+
+      <p class="hero-intro">
+        I'm Ricardo “Saga”—a developer and designer with 8+ years of experience
+        creating accessible digital products, cloud-powered platforms, and
+        thoughtful interfaces.
+      </p>
+
+      <div class="hero-actions" aria-label="Portfolio introduction">
+        <a class="hero-action hero-action-primary" href="#technologies">
+          Explore my expertise
+          <span aria-hidden="true">↘</span>
+        </a>
+        <a class="hero-action hero-action-secondary" href="#accessibility">
+          A11Y consulting
+        </a>
+      </div>
+
+      <ul class="hero-credentials" aria-label="Professional highlights">
+        {
+          credentials.map(({ value, label }) => (
+            <li>
+              <strong>{value}</strong>
+              <span>{label}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <div class="hero-visual" aria-hidden="true">
+      <div class="hero-orbit hero-orbit-outer"></div>
+      <div class="hero-orbit hero-orbit-inner"></div>
+
+      <div class="hero-portrait-card">
+        <div class="hero-card-topline">
+          <span>SAGA / 2026</span>
+          <span class="hero-card-status">PORTFOLIO</span>
+        </div>
+        <Picture
+          class="hero-mascot"
+          src={doggo}
+          widths={widths}
+          sizes={sizes}
+          loading="eager"
+          alt=""
+        />
+        <div class="hero-card-caption">
+          <span>Design</span>
+          <span>Code</span>
+          <span>Cloud</span>
+        </div>
+      </div>
+
+      <div class="hero-tag hero-tag-aws">AWS</div>
+      <div class="hero-tag hero-tag-a11y">A11Y</div>
+      <div class="hero-tag hero-tag-react">REACT</div>
+      <div class="hero-tag hero-tag-ai">AI</div>
+    </div>
+  </div>
+
+  <a class="hero-scroll-cue" href="#aboutme">
+    <span>Scroll to discover</span>
+    <span class="hero-scroll-line" aria-hidden="true"></span>
+  </a>
+</section>
+
+<style>
+  .hero-v2 {
+    position: relative;
+    display: grid;
+    min-height: 100vh;
+    min-height: 100svh;
+    overflow: hidden;
+    isolation: isolate;
+    background: radial-gradient(
+        circle at 15% 15%,
+        rgb(30 64 175 / 28%),
+        transparent 32rem
+      ),
+      radial-gradient(
+        circle at 85% 72%,
+        rgb(14 165 233 / 18%),
+        transparent 28rem
+      ),
+      linear-gradient(145deg, #05070d 0%, #0b1020 52%, #080b14 100%);
+    color: #f8fafc;
+  }
+
+  .hero-grid {
+    position: absolute;
+    inset: 0;
+    z-index: -3;
+    opacity: 0.18;
+    background-image: linear-gradient(
+        rgb(148 163 184 / 22%) 1px,
+        transparent 1px
+      ),
+      linear-gradient(90deg, rgb(148 163 184 / 22%) 1px, transparent 1px);
+    background-size: 64px 64px;
+    mask-image: linear-gradient(to bottom, black, transparent 85%);
+  }
+
+  .hero-glow {
+    position: absolute;
+    z-index: -2;
+    border-radius: 9999px;
+    filter: blur(1px);
+    opacity: 0.72;
+    animation: hero-drift 9s ease-in-out infinite alternate;
+  }
+
+  .hero-glow-primary {
+    top: 8%;
+    right: 16%;
+    width: 18rem;
+    height: 18rem;
+    border: 1px solid rgb(99 102 241 / 45%);
+    box-shadow: 0 0 9rem rgb(79 70 229 / 22%);
+  }
+
+  .hero-glow-secondary {
+    bottom: 5%;
+    left: 8%;
+    width: 8rem;
+    height: 8rem;
+    border: 1px solid rgb(56 189 248 / 35%);
+    animation-delay: -3s;
+  }
+
+  .hero-layout {
+    display: grid;
+    width: min(100% - 3rem, 80rem);
+    margin: auto;
+    padding-block: clamp(5rem, 10vh, 8rem) 9rem;
+    align-items: center;
+    gap: clamp(2.5rem, 5vw, 5rem);
+  }
+
+  .hero-copy {
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+    color: #bae6fd;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    line-height: 1.5;
+    text-transform: uppercase;
+  }
+
+  .hero-eyebrow-dot {
+    width: 0.55rem;
+    height: 0.55rem;
+    flex: 0 0 auto;
+    border-radius: 9999px;
+    background: #38bdf8;
+    box-shadow: 0 0 1.25rem #38bdf8;
+  }
+
+  .hero-title {
+    font-size: clamp(3.4rem, 6.5vw, 5.25rem);
+    font-weight: 850;
+    letter-spacing: -0.065em;
+    line-height: 0.92;
+  }
+
+  .hero-title-line {
+    display: block;
+    white-space: nowrap;
+  }
+
+  .hero-title-accent {
+    color: transparent;
+    background: linear-gradient(105deg, #818cf8 5%, #38bdf8 56%, #67e8f9 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+  }
+
+  .hero-intro {
+    max-width: 42rem;
+    margin-top: 1.75rem;
+    color: #cbd5e1;
+    font-size: clamp(1rem, 1.8vw, 1.2rem);
+    line-height: 1.7;
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 2rem;
+  }
+
+  .hero-action {
+    display: inline-flex;
+    min-height: 3rem;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    border: 1px solid transparent;
+    padding: 0.75rem 1.1rem;
+    font-size: 0.875rem;
+    font-weight: 750;
+    text-decoration: none;
+  }
+
+  .hero-action-primary {
+    border-color: #7dd3fc;
+    background: #e0f2fe;
+    color: #082f49;
+    box-shadow: 0 0.75rem 3rem rgb(14 165 233 / 18%);
+  }
+
+  .hero-action-primary:hover {
+    background: #bae6fd;
+    color: #082f49;
+  }
+
+  .hero-action-secondary {
+    border-color: rgb(148 163 184 / 45%);
+    background: rgb(15 23 42 / 50%);
+    color: #f8fafc;
+    backdrop-filter: blur(0.75rem);
+  }
+
+  .hero-action-secondary:hover {
+    border-color: #7dd3fc;
+    color: #bae6fd;
+  }
+
+  .hero-credentials {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0;
+    margin-top: 2.5rem;
+  }
+
+  .hero-credentials li {
+    display: grid;
+    min-width: 8rem;
+    gap: 0.15rem;
+    border-left: 1px solid rgb(148 163 184 / 28%);
+    padding: 0.25rem 1.25rem;
+  }
+
+  .hero-credentials li:first-child {
+    padding-left: 0;
+    border-left: 0;
+  }
+
+  .hero-credentials strong {
+    color: #f8fafc;
+    font-size: 1.15rem;
+    letter-spacing: -0.03em;
+  }
+
+  .hero-credentials span {
+    color: #94a3b8;
+    font-size: 0.72rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .hero-visual {
+    position: relative;
+    display: grid;
+    min-height: 30rem;
+    place-items: center;
+  }
+
+  .hero-portrait-card {
+    position: relative;
+    z-index: 2;
+    width: min(100%, 24rem);
+    overflow: hidden;
+  }
+
+  .hero-card-topline,
+  .hero-card-caption {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #cbd5e1;
+    font-size: 0.64rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .hero-card-topline {
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 1.5rem 4rem 0;
+    white-space: nowrap;
+  }
+
+  .hero-card-topline span + span::before {
+    margin-right: 0.75rem;
+    color: #64748b;
+    content: "·";
+  }
+
+  .hero-card-status {
+    color: #7dd3fc;
+  }
+
+  .hero-mascot {
+    width: 100%;
+    height: 22rem;
+    object-fit: contain;
+    object-position: center bottom;
+    filter: drop-shadow(0 1.5rem 2rem rgb(0 0 0 / 40%));
+    animation: hero-float 4.5s ease-in-out infinite alternate;
+  }
+
+  .hero-card-caption {
+    padding: 1rem 1.5rem;
+  }
+
+  .hero-orbit {
+    position: absolute;
+    border: 1px solid rgb(125 211 252 / 20%);
+    border-radius: 50%;
+  }
+
+  .hero-orbit-outer {
+    width: 29rem;
+    height: 29rem;
+    animation: hero-spin 32s linear infinite;
+  }
+
+  .hero-orbit-inner {
+    width: 25rem;
+    height: 25rem;
+    border-style: dashed;
+    border-color: rgb(129 140 248 / 22%);
+    animation: hero-spin 24s linear infinite reverse;
+  }
+
+  .hero-tag {
+    position: absolute;
+    z-index: 3;
+    display: grid;
+    min-width: 3.5rem;
+    min-height: 2rem;
+    place-items: center;
+    border: 1px solid rgb(186 230 253 / 25%);
+    border-radius: 9999px;
+    background: rgb(15 23 42 / 88%);
+    color: #e0f2fe;
+    box-shadow: 0 0.75rem 2rem rgb(0 0 0 / 32%);
+    font-size: 0.65rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    backdrop-filter: blur(0.75rem);
+  }
+
+  .hero-tag-aws {
+    top: 29%;
+    left: -1%;
+  }
+
+  .hero-tag-a11y {
+    top: 39%;
+    right: -1%;
+  }
+
+  .hero-tag-react {
+    bottom: 32%;
+    left: -4%;
+  }
+
+  .hero-tag-ai {
+    right: 3%;
+    bottom: 25%;
+  }
+
+  .hero-scroll-cue {
+    position: absolute;
+    bottom: 5.25rem;
+    left: 50%;
+    z-index: 4;
+    display: flex;
+    min-height: 2.75rem;
+    align-items: center;
+    gap: 0.8rem;
+    color: #94a3b8;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    transform: translateX(-50%);
+  }
+
+  .hero-scroll-line {
+    display: block;
+    width: 2.5rem;
+    height: 1px;
+    overflow: hidden;
+    background: rgb(148 163 184 / 35%);
+  }
+
+  .hero-scroll-line::after {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: #7dd3fc;
+    content: "";
+    animation: hero-scan 2.2s ease-in-out infinite;
+    transform: translateX(-100%);
+  }
+
+  @keyframes hero-drift {
+    to {
+      transform: translate3d(1rem, 1.5rem, 0) scale(1.06);
+    }
+  }
+
+  @keyframes hero-float {
+    to {
+      transform: translate3d(0, -0.8rem, 0);
+    }
+  }
+
+  @keyframes hero-spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes hero-scan {
+    50%,
+    100% {
+      transform: translateX(100%);
+    }
+  }
+
+  @media (min-width: 900px) {
+    .hero-layout {
+      grid-template-columns: minmax(0, 1.25fr) minmax(19rem, 0.75fr);
+    }
+  }
+
+  @media (max-width: 899px) {
+    .hero-layout {
+      padding-top: 5.5rem;
+    }
+
+    .hero-copy {
+      max-width: 44rem;
+    }
+
+    .hero-visual {
+      min-height: 29rem;
+    }
+
+    .hero-portrait-card {
+      width: min(78vw, 22rem);
+    }
+
+    .hero-mascot {
+      height: 21rem;
+    }
+  }
+
+  @media (max-width: 639px) {
+    .hero-layout {
+      width: min(100% - 2rem, 80rem);
+      padding-block: 5.25rem 9rem;
+      gap: 2.25rem;
+    }
+
+    .hero-title {
+      font-size: clamp(3.1rem, 16vw, 4.8rem);
+    }
+
+    .hero-title-line {
+      white-space: normal;
+    }
+
+    .hero-eyebrow {
+      align-items: flex-start;
+      font-size: 0.68rem;
+    }
+
+    .hero-actions {
+      display: grid;
+    }
+
+    .hero-action {
+      width: 100%;
+    }
+
+    .hero-credentials {
+      display: none;
+    }
+
+    .hero-visual {
+      min-height: 24rem;
+      margin-top: 5rem;
+    }
+
+    .hero-portrait-card {
+      width: min(82vw, 19rem);
+    }
+
+    .hero-mascot {
+      height: 18rem;
+    }
+
+    .hero-orbit-outer {
+      width: 23rem;
+      height: 23rem;
+    }
+
+    .hero-orbit-inner {
+      width: 20rem;
+      height: 20rem;
+    }
+
+    .hero-tag-aws {
+      top: 28%;
+      left: -0.25rem;
+    }
+
+    .hero-tag-a11y {
+      top: 40%;
+      right: -0.25rem;
+    }
+
+    .hero-tag-react {
+      bottom: 33%;
+      left: -0.25rem;
+    }
+
+    .hero-tag-ai {
+      right: -0.25rem;
+      bottom: 24%;
+    }
+
+    .hero-scroll-cue {
+      bottom: 5rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-glow,
+    .hero-mascot,
+    .hero-orbit,
+    .hero-scroll-line::after {
+      animation: none;
+    }
+  }
+</style>

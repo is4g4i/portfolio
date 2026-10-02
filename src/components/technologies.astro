@@ -1,6 +1,5 @@
 ---
 import TechnologiesList from "./technologies-list.astro";
-import ContentSection from "./content-section.astro";
 import type { TechnologyItem } from "~/types";
 
 const frameworks: Array<TechnologyItem> = [
@@ -206,19 +205,145 @@ const platforms: Array<TechnologyItem> = [
     url: "https://pages.github.com/",
   },
 ];
+
+const technologyGroups = [
+  { title: "Libraries", items: libraries, size: "compact" },
+  { title: "Frameworks", items: frameworks, size: "wide" },
+  { title: "Styling", items: styling, size: "wide" },
+  { title: "CMS", items: cms, size: "compact" },
+  { title: "Platforms", items: platforms, size: "compact" },
+  { title: "AWS Services", items: awsServices, size: "wide" },
+  { title: "AI Tools", items: aiTools, size: "wide" },
+  { title: "CRO & Tracking", items: croAndTracking, size: "compact" },
+];
+
+const technologyCount = technologyGroups.reduce(
+  (total, group) => total + group.items.length,
+  0
+);
 ---
 
-<ContentSection title="Technologies" id="technologies">
-  <Fragment slot="lead">
-    Here are some of the <span class="text-primary">technologies</span> I have previosly
-    work with:
-  </Fragment>
-  <TechnologiesList items={libraries} title="Libraries" />
-  <TechnologiesList items={frameworks} title="Frameworks" />
-  <TechnologiesList items={styling} title="Styling" />
-  <TechnologiesList items={cms} title="CMS" />
-  <TechnologiesList items={platforms} title="Platforms" />
-  <TechnologiesList items={awsServices} title="AWS Services" />
-  <TechnologiesList items={aiTools} title="AI Tools" />
-  <TechnologiesList items={croAndTracking} title="CRO & Tracking" />
-</ContentSection>
+<section
+  id="technologies"
+  class="technologies-section"
+  aria-labelledby="technologies-title"
+>
+  <div class="technologies-heading">
+    <div>
+      <p class="section-kicker">
+        Toolbox / {technologyGroups.length} disciplines
+      </p>
+      <h2 id="technologies-title">Technologies I use to move ideas forward.</h2>
+    </div>
+    <div class="technologies-summary">
+      <strong>{technologyCount}</strong>
+      <p>
+        Tools across product engineering, cloud, design, AI, and growth—selected
+        according to the problem, not the trend.
+      </p>
+    </div>
+  </div>
+
+  <div class="technology-groups">
+    {
+      technologyGroups.map(({ title, items, size }) => (
+        <div class:list={["technology-group", `technology-group--${size}`]}>
+          <TechnologiesList items={items} title={title} />
+        </div>
+      ))
+    }
+  </div>
+</section>
+
+<style>
+  .technologies-section {
+    width: min(100%, 80rem);
+    margin-inline: auto;
+    scroll-margin-top: 6rem;
+  }
+
+  .technologies-heading {
+    display: grid;
+    gap: 2.5rem;
+    padding-bottom: clamp(2.5rem, 6vw, 4.5rem);
+  }
+
+  .section-kicker {
+    color: var(--color-primary);
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .technologies-heading h2 {
+    max-width: 54rem;
+    margin-top: 1.25rem;
+    font-size: clamp(2.6rem, 5.8vw, 5rem);
+    font-weight: 850;
+    letter-spacing: -0.06em;
+    line-height: 0.98;
+  }
+
+  .technologies-summary {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: start;
+    gap: 1.25rem;
+    border-left: 1px solid var(--color-primary);
+    padding-left: 1.25rem;
+  }
+
+  .technologies-summary strong {
+    color: var(--color-primary);
+    font-size: 2.25rem;
+    font-weight: 850;
+    letter-spacing: -0.06em;
+    line-height: 1;
+  }
+
+  .technologies-summary p {
+    max-width: 28rem;
+    color: var(--color-text-offset);
+    font-size: 0.95rem;
+    line-height: 1.7;
+  }
+
+  .technology-groups {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .technology-group {
+    min-width: 0;
+  }
+
+  @media (min-width: 900px) {
+    .technologies-heading {
+      grid-template-columns: minmax(0, 1.45fr) minmax(18rem, 0.55fr);
+      align-items: end;
+    }
+
+    .technology-groups {
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+    }
+
+    .technology-group--compact {
+      grid-column: span 5;
+    }
+
+    .technology-group--wide {
+      grid-column: span 7;
+    }
+  }
+
+  @media (max-width: 639px) {
+    .technologies-heading h2 {
+      font-size: clamp(2.55rem, 12vw, 3.8rem);
+    }
+
+    .technologies-summary {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

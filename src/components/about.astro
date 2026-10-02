@@ -1,46 +1,252 @@
 ---
-import ContentSection from "./content-section.astro";
-import type { FeatureItem } from "../types";
+const expertise = [
+  {
+    number: "01",
+    label: "Cloud & AI",
+    title: "AWS Certified AI Practitioner",
+    description:
+      "Certified in AWS AI fundamentals, with hands-on proficiency building and operating solutions across Amplify, S3, CloudWatch, DynamoDB, and the wider AWS ecosystem.",
+  },
+  {
+    number: "02",
+    label: "Product engineering",
+    title: "JavaScript specialist",
+    description:
+      "Eight years creating dependable web and mobile products with JavaScript, React, React Native, Astro, and modern frontend architecture.",
+  },
+  {
+    number: "03",
+    label: "Design & inclusion",
+    title: "UI/UX and A11Y consultant",
+    description:
+      "I connect Figma, accessible interaction design, and production code so inclusive ideas survive the journey from concept to shipped product.",
+  },
+];
 
-const features: Array<FeatureItem> = [
-  {
-    title: "AWS IA Certified",
-    description:
-      "AWS AI certified, with strong hands-on proficiency across AWS cloud architecture and services.",
-  },
-  {
-    title: "JavaScript Specialist",
-    description:
-      "Eight years of experience building modern web and mobile applications with JavaScript, React, and related frameworks.",
-  },
-  {
-    title: "UI/UX, A11Y Consulting & Cloud",
-    description:
-      "I provide professional accessibility consulting, design inclusive experiences in Figma, and turn them into polished products backed by modern cloud technology.",
-  },
+const principles = [
+  "Human-centered",
+  "Accessibility-first",
+  "Cloud-ready",
+  "Built to scale",
 ];
 ---
 
-<ContentSection title="About me" id="aboutme">
-  <Fragment slot="lead">
-    Greetings, Im a <span class="text-primary">Web developer</span> and also a
-    <span class="text-primary">UI/UX Designer</span>. <br /><br />
-    With 8+ years of experience developing in multiple <span
-      class="text-primary">JavaScript</span
-    > frameworks and tech stacks with a strong focus on <span
-      class="text-primary">A11y</span
-    >.<br /><br />
-    I can help you to build an awesome <span class="text-primary">web app</span
-    >!
-  </Fragment>
-  <ul class="grid max-w-6xl grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+<section id="aboutme" class="about-section" aria-labelledby="about-title">
+  <div class="about-heading">
+    <p class="section-kicker"><span>01</span> About me</p>
+    <h2 id="about-title">
+      I turn complex ideas into inclusive digital products.
+    </h2>
+  </div>
+
+  <div class="about-intro">
+    <p class="about-lead">
+      I’m Ricardo “Saga”—a web developer, UI/UX designer, and accessibility
+      consultant with more than eight years of experience across product design,
+      engineering, and cloud technology.
+    </p>
+    <div class="about-note">
+      <span aria-hidden="true">↘</span>
+      <p>
+        My strongest work happens where design, code, cloud, and accessibility
+        meet: thoughtful experiences that feel simple for people and stay
+        maintainable for teams.
+      </p>
+    </div>
+  </div>
+
+  <ul class="expertise-grid" aria-label="Core expertise">
     {
-      features.map(({ title, description }) => (
-        <li class="flex flex-col items-center gap-4 border border-default bg-offset p-6">
-          <p class="text-center font-extrabold text-xl">{title}</p>
-          <p class="text-center text-offset text-sm">{description}</p>
+      expertise.map(({ number, label, title, description }) => (
+        <li class="expertise-card">
+          <div class="expertise-meta">
+            <span>{number}</span>
+            <span>{label}</span>
+          </div>
+          <h3>{title}</h3>
+          <p>{description}</p>
         </li>
       ))
     }
   </ul>
-</ContentSection>
+
+  <ul class="principles" aria-label="How I approach my work">
+    {
+      principles.map((principle) => (
+        <li>
+          <span aria-hidden="true" />
+          {principle}
+        </li>
+      ))
+    }
+  </ul>
+</section>
+
+<style>
+  .about-section {
+    width: min(100%, 80rem);
+    margin-inline: auto;
+    scroll-margin-top: 6rem;
+  }
+
+  .about-heading {
+    display: grid;
+    gap: 1.25rem;
+  }
+
+  .section-kicker {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--color-primary);
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .section-kicker span {
+    display: grid;
+    width: 2rem;
+    height: 2rem;
+    place-items: center;
+    border: 1px solid var(--color-border);
+    color: var(--color-text-offset);
+    font-size: 0.65rem;
+  }
+
+  .about-heading h2 {
+    max-width: 58rem;
+    font-size: clamp(2.6rem, 6vw, 5.25rem);
+    font-weight: 850;
+    letter-spacing: -0.06em;
+    line-height: 0.98;
+  }
+
+  .about-intro {
+    display: grid;
+    margin-top: clamp(2.5rem, 6vw, 5rem);
+    gap: 2rem;
+  }
+
+  .about-lead {
+    max-width: 48rem;
+    font-size: clamp(1.25rem, 2.4vw, 1.75rem);
+    font-weight: 650;
+    letter-spacing: -0.025em;
+    line-height: 1.45;
+  }
+
+  .about-note {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 1rem;
+    border-left: 1px solid var(--color-primary);
+    padding-left: 1.25rem;
+    color: var(--color-text-offset);
+    font-size: 0.95rem;
+    line-height: 1.7;
+  }
+
+  .about-note > span {
+    color: var(--color-primary);
+    font-weight: 800;
+  }
+
+  .expertise-grid {
+    display: grid;
+    margin-top: clamp(3rem, 7vw, 5.5rem);
+    border-top: 1px solid var(--color-border);
+    border-left: 1px solid var(--color-border);
+  }
+
+  .expertise-card {
+    min-height: 18rem;
+    border-right: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+    padding: clamp(1.5rem, 3vw, 2.25rem);
+    background: var(--color-background-offset);
+  }
+
+  .expertise-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    color: var(--color-text-offset);
+    font-size: 0.68rem;
+    font-weight: 750;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .expertise-meta span:first-child {
+    color: var(--color-primary);
+  }
+
+  .expertise-card h3 {
+    max-width: 18rem;
+    margin-top: 3.75rem;
+    font-size: clamp(1.35rem, 2.1vw, 1.65rem);
+    font-weight: 800;
+    letter-spacing: -0.035em;
+    line-height: 1.15;
+  }
+
+  .expertise-card > p {
+    margin-top: 1.1rem;
+    color: var(--color-text-offset);
+    font-size: 0.9rem;
+    line-height: 1.7;
+  }
+
+  .principles {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem 2rem;
+    margin-top: 1.75rem;
+  }
+
+  .principles li {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    color: var(--color-text-offset);
+    font-size: 0.72rem;
+    font-weight: 750;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .principles li span {
+    width: 0.35rem;
+    height: 0.35rem;
+    border-radius: 50%;
+    background: var(--color-primary);
+  }
+
+  @media (min-width: 800px) {
+    .about-intro {
+      grid-template-columns: minmax(0, 1.5fr) minmax(17rem, 0.65fr);
+      align-items: end;
+    }
+
+    .expertise-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 639px) {
+    .about-heading h2 {
+      font-size: clamp(2.65rem, 13vw, 4rem);
+    }
+
+    .expertise-card {
+      min-height: auto;
+    }
+
+    .expertise-card h3 {
+      margin-top: 2.5rem;
+    }
+  }
+</style>

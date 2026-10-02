@@ -1,45 +1,281 @@
 ---
-import ContentSection from "./content-section.astro";
-import type { FeatureItem } from "../types";
+const services = [
+  {
+    number: "01",
+    title: "Assess",
+    subtitle: "Accessibility audits",
+    description:
+      "I evaluate experiences against WCAG, identify real barriers, and separate critical issues from lower-impact improvements.",
+  },
+  {
+    number: "02",
+    title: "Prioritize",
+    subtitle: "A practical roadmap",
+    description:
+      "Findings become a clear, actionable plan that product, design, and engineering teams can understand, estimate, and deliver.",
+  },
+  {
+    number: "03",
+    title: "Remediate",
+    subtitle: "Accessible engineering",
+    description:
+      "I help implement semantic HTML, resilient ARIA patterns, keyboard access, focus management, and reduced-motion experiences.",
+  },
+  {
+    number: "04",
+    title: "Scale",
+    subtitle: "Inclusive systems",
+    description:
+      "I embed accessible patterns into Figma libraries, reusable components, team practices, and design systems so improvements last.",
+  },
+];
 
-const accessibilitySkills: Array<FeatureItem> = [
-  {
-    title: "Accessibility Consulting",
-    description:
-      "Providing professional guidance, accessibility roadmaps, and practical recommendations that align product, design, and engineering teams.",
-  },
-  {
-    title: "WCAG Audits & Remediation",
-    description:
-      "Evaluating digital experiences against WCAG, prioritizing barriers, and turning findings into clear, actionable remediation plans.",
-  },
-  {
-    title: "Accessible Engineering",
-    description:
-      "Building semantic HTML and ARIA patterns, predictable keyboard navigation, resilient focus management, and reduced-motion experiences.",
-  },
-  {
-    title: "Inclusive UX & Design Systems",
-    description:
-      "Helping teams embed accessible interaction patterns, readable contrast, adaptable layouts, and inclusive practices into reusable design systems.",
-  },
+const capabilities = [
+  "WCAG guidance",
+  "Semantic HTML",
+  "ARIA patterns",
+  "Keyboard & focus",
+  "Inclusive UX",
+  "Design systems",
 ];
 ---
 
-<ContentSection title="Accessibility" id="accessibility">
-  <Fragment slot="lead">
-    As a professional <span class="text-primary">accessibility consultant</span
-    >, I help teams assess, design, build, and improve inclusive digital
-    experiences throughout the product lifecycle.
-  </Fragment>
-  <ul class="grid max-w-6xl grid-cols-1 md:grid-cols-2">
+<section
+  id="accessibility"
+  class="accessibility-section"
+  aria-labelledby="accessibility-title"
+>
+  <div class="accessibility-header">
+    <div>
+      <p class="section-kicker"><span>02</span> Accessibility consulting</p>
+      <h2 id="accessibility-title">
+        Accessibility that survives the real product lifecycle.
+      </h2>
+    </div>
+    <p class="accessibility-lead">
+      I help teams move beyond one-time checklists. Together, we find barriers,
+      make confident decisions, improve the product, and build practices that
+      keep accessibility present from discovery through delivery.
+    </p>
+  </div>
+
+  <ol class="service-grid" aria-label="Accessibility consulting process">
     {
-      accessibilitySkills.map(({ title, description }) => (
-        <li class="flex flex-col items-center gap-4 border border-default bg-offset p-6">
-          <p class="text-center font-extrabold text-xl">{title}</p>
-          <p class="text-center text-offset text-sm">{description}</p>
+      services.map(({ number, title, subtitle, description }) => (
+        <li class="service-card">
+          <span class="service-number" aria-hidden="true">
+            {number}
+          </span>
+          <div>
+            <p class="service-subtitle">{subtitle}</p>
+            <h3>{title}</h3>
+            <p class="service-description">{description}</p>
+          </div>
         </li>
       ))
     }
-  </ul>
-</ContentSection>
+  </ol>
+
+  <div class="consulting-footer">
+    <div class="consulting-statement">
+      <span aria-hidden="true">A11Y</span>
+      <p>
+        Good accessibility work is collaborative. I translate standards into
+        product decisions your team can act on—without losing sight of the
+        people those decisions affect.
+      </p>
+    </div>
+    <ul class="capability-list" aria-label="Accessibility capabilities">
+      {capabilities.map((capability) => <li>{capability}</li>)}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .accessibility-section {
+    width: min(100%, 80rem);
+    margin-inline: auto;
+    scroll-margin-top: 6rem;
+    overflow: hidden;
+    border: 1px solid rgb(125 211 252 / 24%);
+    border-radius: 1rem;
+    background: radial-gradient(
+        circle at 88% 12%,
+        rgb(79 70 229 / 24%),
+        transparent 24rem
+      ),
+      linear-gradient(145deg, #070b14 0%, #0b1324 60%, #071421 100%);
+    color: #f8fafc;
+    box-shadow: 0 2rem 6rem rgb(2 6 23 / 20%);
+  }
+
+  .accessibility-header {
+    display: grid;
+    gap: 2.5rem;
+    padding: clamp(2rem, 6vw, 5rem);
+  }
+
+  .section-kicker {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: #7dd3fc;
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .section-kicker span {
+    display: grid;
+    width: 2rem;
+    height: 2rem;
+    place-items: center;
+    border: 1px solid rgb(186 230 253 / 24%);
+    color: #94a3b8;
+    font-size: 0.65rem;
+  }
+
+  .accessibility-header h2 {
+    max-width: 47rem;
+    margin-top: 1.5rem;
+    font-size: clamp(2.6rem, 5.8vw, 4.8rem);
+    font-weight: 850;
+    letter-spacing: -0.06em;
+    line-height: 0.98;
+  }
+
+  .accessibility-lead {
+    max-width: 34rem;
+    color: #cbd5e1;
+    font-size: clamp(1rem, 1.7vw, 1.2rem);
+    line-height: 1.75;
+  }
+
+  .service-grid {
+    display: grid;
+    border-top: 1px solid rgb(148 163 184 / 18%);
+    border-left: 1px solid rgb(148 163 184 / 18%);
+  }
+
+  .service-card {
+    display: grid;
+    min-height: 18rem;
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: start;
+    gap: clamp(1.25rem, 3vw, 2rem);
+    border-right: 1px solid rgb(148 163 184 / 18%);
+    border-bottom: 1px solid rgb(148 163 184 / 18%);
+    padding: clamp(1.75rem, 4vw, 3rem);
+  }
+
+  .service-number {
+    color: #38bdf8;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .service-subtitle {
+    color: #94a3b8;
+    font-size: 0.68rem;
+    font-weight: 750;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .service-card h3 {
+    margin-top: 0.75rem;
+    font-size: clamp(1.65rem, 3vw, 2.2rem);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+  }
+
+  .service-description {
+    margin-top: 1.25rem;
+    color: #cbd5e1;
+    font-size: 0.9rem;
+    line-height: 1.7;
+  }
+
+  .consulting-footer {
+    display: grid;
+    gap: 2.5rem;
+    padding: clamp(2rem, 5vw, 4rem);
+  }
+
+  .consulting-statement {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 1.25rem;
+  }
+
+  .consulting-statement > span {
+    color: #7dd3fc;
+    font-size: 0.7rem;
+    font-weight: 850;
+    letter-spacing: 0.12em;
+  }
+
+  .consulting-statement p {
+    max-width: 43rem;
+    color: #e2e8f0;
+    font-size: clamp(1.05rem, 2vw, 1.35rem);
+    font-weight: 650;
+    letter-spacing: -0.02em;
+    line-height: 1.55;
+  }
+
+  .capability-list {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    gap: 0.6rem;
+  }
+
+  .capability-list li {
+    border: 1px solid rgb(186 230 253 / 22%);
+    border-radius: 0.35rem;
+    padding: 0.6rem 0.8rem;
+    background: rgb(15 23 42 / 58%);
+    color: #bae6fd;
+    font-size: 0.68rem;
+    font-weight: 750;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  @media (min-width: 800px) {
+    .accessibility-header {
+      grid-template-columns: minmax(0, 1.4fr) minmax(18rem, 0.6fr);
+      align-items: end;
+    }
+
+    .service-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .consulting-footer {
+      grid-template-columns: minmax(0, 1.35fr) minmax(17rem, 0.65fr);
+      align-items: start;
+    }
+  }
+
+  @media (max-width: 639px) {
+    .accessibility-section {
+      border-radius: 0.75rem;
+    }
+
+    .accessibility-header h2 {
+      font-size: clamp(2.5rem, 12vw, 3.8rem);
+    }
+
+    .service-card {
+      min-height: auto;
+    }
+
+    .consulting-statement {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

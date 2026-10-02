@@ -10,24 +10,170 @@ export interface Props {
 const { items, title } = Astro.props;
 ---
 
-<div class="w-full max-w-6xl space-y-2">
-  <div class="relative border border-default bg-offset px-6 pt-8 pb-4">
-    <h3
-      class="absolute top-0 right-4 -translate-y-1/2 rounded-full border border-current bg-default px-4 py-1 uppercase tracking-tight text-xs"
-    >
-      {title}
-    </h3>
-    <ul class="grid grid-cols-2 gap-8 sm:grid-cols-3 md:grid-cols-6 place-items-center">
-      {
-        items.map((item) => (
-          <li>
-            <a class="flex flex-col items-center gap-2" href={item.url} target="_blank">
-              <Icon class="h-12" name={item.icon} />
-              <span>{item.title}</span>
-            </a>
-          </li>
-        ))
-      }
-    </ul>
-  </div>
-</div>
+<article class="technology-panel">
+  <header class="technology-panel-header">
+    <h3>{title}</h3>
+    <span>{String(items.length).padStart(2, "0")}</span>
+  </header>
+
+  <ul class="technology-list">
+    {
+      items.map((item) => (
+        <li>
+          <a href={item.url} target="_blank" rel="noopener noreferrer">
+            <span class="technology-icon" aria-hidden="true">
+              <Icon name={item.icon} />
+            </span>
+            <span class="technology-name">{item.title}</span>
+            <svg
+              class="technology-arrow"
+              viewBox="0 0 16 16"
+              aria-hidden="true"
+            >
+              <path d="M4 12 12 4M6 4h6v6" />
+            </svg>
+            <span class="sr-only"> (opens in a new tab)</span>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</article>
+
+<style>
+  .technology-panel {
+    height: 100%;
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+    border-radius: 0.75rem;
+    background: var(--color-background-offset);
+  }
+
+  .technology-panel-header {
+    display: flex;
+    min-height: 4.5rem;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    border-bottom: 1px solid var(--color-border);
+    padding: 1.25rem 1.5rem;
+  }
+
+  .technology-panel-header h3 {
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .technology-panel-header > span {
+    color: var(--color-primary);
+    font-size: 0.7rem;
+    font-variant-numeric: tabular-nums;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .technology-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .technology-list li {
+    min-width: 0;
+    border-right: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .technology-list li:nth-child(2n) {
+    border-right: 0;
+  }
+
+  .technology-list a {
+    position: relative;
+    display: grid;
+    min-height: 8.25rem;
+    align-content: center;
+    justify-items: start;
+    gap: 0.8rem;
+    padding: 1.25rem;
+    color: var(--color-text);
+    text-decoration: none;
+    transition: background-color 180ms ease, box-shadow 180ms ease;
+  }
+
+  .technology-list a:hover {
+    background: var(--color-background);
+    color: var(--color-text);
+    box-shadow: inset 0 0 0 1px var(--color-primary);
+  }
+
+  .technology-list a:focus-visible {
+    z-index: 1;
+    outline: 3px solid var(--color-primary);
+    outline-offset: -3px;
+    background: var(--color-background);
+    color: var(--color-text);
+  }
+
+  .technology-icon {
+    display: grid;
+    width: 2.75rem;
+    height: 2.75rem;
+    place-items: center;
+    color: var(--color-text);
+  }
+
+  .technology-icon :global(svg) {
+    width: 100%;
+    height: 100%;
+  }
+
+  .technology-name {
+    min-width: 0;
+    overflow-wrap: anywhere;
+    font-size: 0.9rem;
+    font-weight: 700;
+    line-height: 1.25;
+  }
+
+  .technology-arrow {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 1rem;
+    height: 1rem;
+    fill: none;
+    stroke: var(--color-text-offset);
+    stroke-linecap: square;
+    stroke-linejoin: miter;
+    stroke-width: 1.5;
+    transition: stroke 180ms ease;
+  }
+
+  .technology-list a:hover .technology-arrow,
+  .technology-list a:focus-visible .technology-arrow {
+    stroke: var(--color-primary);
+  }
+
+  @media (min-width: 600px) {
+    .technology-list {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .technology-list li:nth-child(2n) {
+      border-right: 1px solid var(--color-border);
+    }
+
+    .technology-list li:nth-child(3n) {
+      border-right: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .technology-list a,
+    .technology-arrow {
+      transition: none;
+    }
+  }
+</style>
