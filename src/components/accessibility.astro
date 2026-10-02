@@ -1,0 +1,45 @@
+---
+import ContentSection from "./content-section.astro";
+import type { FeatureItem } from "../types";
+
+const accessibilitySkills: Array<FeatureItem> = [
+  {
+    title: "Accessibility Consulting",
+    description:
+      "Providing professional guidance, accessibility roadmaps, and practical recommendations that align product, design, and engineering teams.",
+  },
+  {
+    title: "WCAG Audits & Remediation",
+    description:
+      "Evaluating digital experiences against WCAG, prioritizing barriers, and turning findings into clear, actionable remediation plans.",
+  },
+  {
+    title: "Accessible Engineering",
+    description:
+      "Building semantic HTML and ARIA patterns, predictable keyboard navigation, resilient focus management, and reduced-motion experiences.",
+  },
+  {
+    title: "Inclusive UX & Design Systems",
+    description:
+      "Helping teams embed accessible interaction patterns, readable contrast, adaptable layouts, and inclusive practices into reusable design systems.",
+  },
+];
+---
+
+<ContentSection title="Accessibility" id="accessibility">
+  <Fragment slot="lead">
+    As a professional <span class="text-primary">accessibility consultant</span
+    >, I help teams assess, design, build, and improve inclusive digital
+    experiences throughout the product lifecycle.
+  </Fragment>
+  <ul class="grid max-w-6xl grid-cols-1 md:grid-cols-2">
+    {
+      accessibilitySkills.map(({ title, description }) => (
+        <li class="flex flex-col items-center gap-4 border border-default bg-offset p-6">
+          <p class="text-center font-extrabold text-xl">{title}</p>
+          <p class="text-center text-offset text-sm">{description}</p>
+        </li>
+      ))
+    }
+  </ul>
+</ContentSection>

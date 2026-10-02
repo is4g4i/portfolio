@@ -24,6 +24,11 @@ const frameworks: Array<TechnologyItem> = [
     icon: "frameworks/angular",
     url: "https://angular.io/",
   },
+  {
+    title: "React Native",
+    icon: "libraries/react",
+    url: "https://reactnative.dev/",
+  },
 ];
 
 const libraries: Array<TechnologyItem> = [
@@ -75,8 +80,81 @@ const styling: Array<TechnologyItem> = [
     icon: "styling/bootstrap",
     url: "https://getbootstrap.com",
   },
+  {
+    title: "Figma",
+    icon: "fa-brands:figma",
+    url: "https://www.figma.com/",
+  },
 ];
 
+const awsServices: Array<TechnologyItem> = [
+  {
+    title: "AWS Amplify",
+    icon: "aws/amplify",
+    url: "https://aws.amazon.com/amplify/",
+  },
+  {
+    title: "Amazon S3",
+    icon: "aws/s3",
+    url: "https://aws.amazon.com/s3/",
+  },
+  {
+    title: "AWS Lambda",
+    icon: "mdi:lambda",
+    url: "https://aws.amazon.com/lambda/",
+  },
+  {
+    title: "DynamoDB",
+    icon: "aws/dynamodb",
+    url: "https://aws.amazon.com/dynamodb/",
+  },
+  {
+    title: "Bedrock",
+    icon: "aws/bedrock",
+    url: "https://aws.amazon.com/bedrock/",
+  },
+  {
+    title: "SageMaker",
+    icon: "aws/sagemaker",
+    url: "https://aws.amazon.com/sagemaker/",
+  },
+];
+
+const aiTools: Array<TechnologyItem> = [
+  {
+    title: "Claude",
+    icon: "mdi:creation",
+    url: "https://claude.ai/",
+  },
+  {
+    title: "ChatGPT",
+    icon: "mdi:chat-processing-outline",
+    url: "https://chatgpt.com/",
+  },
+  {
+    title: "Cursor",
+    icon: "mdi:cursor-default-click-outline",
+    url: "https://www.cursor.com/",
+  },
+  {
+    title: "Gemini",
+    icon: "mdi:star-four-points-outline",
+    url: "https://gemini.google.com/",
+  },
+];
+
+const croAndTracking: Array<TechnologyItem> = [
+  {
+    title: "Google Ads",
+    icon: "fa-brands:google",
+    url: "https://ads.google.com/",
+  },
+  {
+    title: "PostHog",
+    icon: "mdi:chart-timeline-variant-shimmer",
+    url: "https://posthog.com/",
+  },
+];
 
 const cms: Array<TechnologyItem> = [
   {
@@ -100,7 +178,6 @@ const cms: Array<TechnologyItem> = [
     url: "https://www.datocms.com/",
   },
 ];
-
 
 const platforms: Array<TechnologyItem> = [
   {
@@ -141,4 +218,7 @@ const platforms: Array<TechnologyItem> = [
   <TechnologiesList items={styling} title="Styling" />
   <TechnologiesList items={cms} title="CMS" />
   <TechnologiesList items={platforms} title="Platforms" />
+  <TechnologiesList items={awsServices} title="AWS Services" />
+  <TechnologiesList items={aiTools} title="AI Tools" />
+  <TechnologiesList items={croAndTracking} title="CRO & Tracking" />
 </ContentSection>
