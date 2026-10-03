@@ -1,0 +1,118 @@
+:root {
+  --motion-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --motion-duration-quick: 620ms;
+  --motion-duration-long: 920ms;
+}
+
+.motion-ready body[data-motion-page] .hero-eyebrow,
+.motion-ready body[data-motion-page] .hero-title-line,
+.motion-ready body[data-motion-page] .hero-intro,
+.motion-ready body[data-motion-page] .hero-actions,
+.motion-ready body[data-motion-page] .hero-credentials,
+.motion-ready body[data-motion-page] .hero-visual,
+.motion-ready body[data-motion-page] .hero-scroll-cue {
+  opacity: 0;
+  will-change: opacity, transform;
+}
+
+.motion-ready body[data-motion-page] .hero-eyebrow,
+.motion-ready body[data-motion-page] .hero-intro,
+.motion-ready body[data-motion-page] .hero-actions,
+.motion-ready body[data-motion-page] .hero-credentials {
+  transform: translate3d(0, 1.25rem, 0);
+}
+
+.motion-ready body[data-motion-page] .hero-title-line {
+  transform: translate3d(0, 2.25rem, 0);
+}
+
+.motion-ready body[data-motion-page] .hero-visual {
+  transform: translate3d(1.75rem, 0, 0) scale(0.96);
+}
+
+.motion-ready body[data-motion-page] .hero-scroll-cue {
+  transform: translate3d(0, 1rem, 0);
+}
+
+.motion-ready body[data-motion-page].motion-entered .hero-eyebrow,
+.motion-ready body[data-motion-page].motion-entered .hero-title-line,
+.motion-ready body[data-motion-page].motion-entered .hero-intro,
+.motion-ready body[data-motion-page].motion-entered .hero-actions,
+.motion-ready body[data-motion-page].motion-entered .hero-credentials,
+.motion-ready body[data-motion-page].motion-entered .hero-visual,
+.motion-ready body[data-motion-page].motion-entered .hero-scroll-cue {
+  opacity: 1;
+  transform: translate3d(0, 0, 0) scale(1);
+  transition: opacity var(--motion-duration-quick) ease-out,
+    transform var(--motion-duration-long) var(--motion-ease-out);
+}
+
+.motion-ready body[data-motion-page].motion-entered .hero-eyebrow {
+  transition-delay: 80ms;
+}
+
+.motion-ready
+  body[data-motion-page].motion-entered
+  .hero-title-line:first-child {
+  transition-delay: 140ms;
+}
+
+.motion-ready
+  body[data-motion-page].motion-entered
+  .hero-title-line:nth-child(2) {
+  transition-delay: 220ms;
+}
+
+.motion-ready body[data-motion-page].motion-entered .hero-intro {
+  transition-delay: 330ms;
+}
+
+.motion-ready body[data-motion-page].motion-entered .hero-actions {
+  transition-delay: 410ms;
+}
+
+.motion-ready body[data-motion-page].motion-entered .hero-credentials {
+  transition-delay: 480ms;
+}
+
+.motion-ready body[data-motion-page].motion-entered .hero-visual {
+  transition-delay: 180ms;
+}
+
+.motion-ready body[data-motion-page].motion-entered .hero-scroll-cue {
+  transition-delay: 680ms;
+}
+
+.motion-ready body[data-motion-page] [data-motion-reveal].motion-observed {
+  opacity: 0;
+  transform: translate3d(0, 2rem, 0);
+  will-change: opacity, transform;
+}
+
+.motion-ready
+  body[data-motion-page]
+  [data-motion-reveal].motion-observed.motion-visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+  transition: opacity var(--motion-duration-quick) ease-out
+      var(--motion-delay, 0ms),
+    transform var(--motion-duration-long) var(--motion-ease-out)
+      var(--motion-delay, 0ms);
+}
+
+@media (max-width: 639px) {
+  .motion-ready body[data-motion-page] .hero-visual {
+    transform: translate3d(0, 1.5rem, 0) scale(0.97);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body[data-motion-page] *,
+  body[data-motion-page] *::before,
+  body[data-motion-page] *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
