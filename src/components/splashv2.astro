@@ -1,6 +1,7 @@
 ---
 import { Picture } from "@astrojs/image/components";
 import doggo from "../assets/doggo1white.png";
+import spartan from "../assets/spartan_thumbUp.png";
 import GitHubCorner from "./github-corner.astro";
 
 const widths = [450, 800];
@@ -9,7 +10,7 @@ const sizes = "(min-width: 1024px) 34vw, (min-width: 640px) 42vw, 72vw";
 const credentials = [
   { value: "8+", label: "Years creating" },
   { value: "AWS", label: "AI Practitioner" },
-  { value: "A11Y", label: "Consultant" },
+  { value: "Web Accessibility", label: "Experienced Consultant" },
 ];
 ---
 
@@ -24,7 +25,7 @@ const credentials = [
     <div class="hero-copy">
       <p class="hero-eyebrow">
         <span class="hero-eyebrow-dot" aria-hidden="true"></span>
-        Web developer · Cloud specialist · A11Y consultant
+        Web developer · Cloud specialist · Accessibility consultant
       </p>
 
       <h1 id="hero-title" class="hero-title">
@@ -44,7 +45,7 @@ const credentials = [
           <span aria-hidden="true">↘</span>
         </a>
         <a class="hero-action hero-action-secondary" href="#accessibility">
-          A11Y consulting
+          Accessibility consulting
         </a>
       </div>
 
@@ -71,7 +72,7 @@ const credentials = [
         </div>
         <Picture
           class="hero-mascot"
-          src={doggo}
+          src={spartan}
           widths={widths}
           sizes={sizes}
           loading="eager"
@@ -85,7 +86,7 @@ const credentials = [
       </div>
 
       <div class="hero-tag hero-tag-aws">AWS</div>
-      <div class="hero-tag hero-tag-a11y">A11Y</div>
+      <div class="hero-tag hero-tag-a11y">A11y</div>
       <div class="hero-tag hero-tag-react">REACT</div>
       <div class="hero-tag hero-tag-ai">AI</div>
     </div>

@@ -1,49 +1,248 @@
 ---
 import { Icon } from "astro-icon";
-import HeroImage from "./hero-image.astro";
 import type { FooterLink } from "../types";
 
-const links: Array<FooterLink> = [
+const links: Array<FooterLink & { label: string }> = [
   {
+    label: "GitHub",
     url: "https://github.com/is4g4i",
-    description: "View source on GitHub",
+    description: "View my GitHub profile",
     icon: "fa-brands:github-alt",
   },
   {
+    label: "LinkedIn",
+    url: "https://www.linkedin.com/in/ricardo-gonzalez-7740117b/",
+    description: "View my LinkedIn profile",
+    icon: "fa-brands:linkedin-in",
+  },
+  {
+    label: "Instagram",
     url: "https://www.instagram.com/ricardogsaga/",
-    description: "My personal Instagram",
+    description: "View my Instagram profile",
     icon: "fa-brands:instagram",
   },
-  {
-    url: "https://twitter.com/ricardogsaga",
-    description: "My Twitter",
-    icon: "fa-brands:twitter",
-  },
-  {
-    url: "https://www.twitch.tv/saga_5464",
-    description: "My twitch channel",
-    icon: "fa-brands:twitch",
-  },
 ];
+
+const currentYear = new Date().getFullYear();
 ---
 
-<footer class="relative flex h-64 items-center justify-center">
-  <div class="absolute inset-0 overflow-hidden opacity-40">
-    <HeroImage />
+<footer class="site-footer">
+  <div class="footer-grid" aria-hidden="true"></div>
+
+  <div class="footer-shell">
+    <div class="footer-main">
+      <div class="footer-identity">
+        <p class="footer-kicker">
+          <span aria-hidden="true"></span>
+          Ricardo “Saga”
+        </p>
+        <p class="footer-tagline">Building the web for every human.</p>
+      </div>
+
+      <ul class="footer-social-list" aria-label="Social profiles">
+        {
+          links.map((link) => (
+            <li>
+              <a
+                href={link.url}
+                aria-label={`${link.description} (opens in a new tab)`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Icon aria-hidden="true" name={link.icon} />
+                <span>{link.label}</span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© {currentYear} · Costa Rica</p>
+      <a class="back-to-top" href="#hero-title">
+        Back to top
+        <span aria-hidden="true">↑</span>
+      </a>
+    </div>
   </div>
-  <ul class="relative grid grid-cols-2 gap-4 sm:grid-cols-4">
-    {
-      links.map((link) => (
-        <li>
-          <a
-            class="flex h-16 w-16 items-center justify-center rounded-full border-2 border-current p-4"
-            href={link.url}
-          >
-            <span class="sr-only">{link.description}</span>
-            <Icon class="h-full" name={link.icon} />
-          </a>
-        </li>
-      ))
-    }
-  </ul>
 </footer>
+
+<style>
+  .site-footer {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    margin-top: clamp(4rem, 8vw, 7rem);
+    background: radial-gradient(
+        circle at 88% 20%,
+        rgb(14 165 233 / 14%),
+        transparent 22rem
+      ),
+      linear-gradient(145deg, #05070d 0%, #0a1020 100%);
+    color: #f8fafc;
+  }
+
+  .footer-grid {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    opacity: 0.1;
+    background-image: linear-gradient(
+        rgb(148 163 184 / 22%) 1px,
+        transparent 1px
+      ),
+      linear-gradient(90deg, rgb(148 163 184 / 22%) 1px, transparent 1px);
+    background-size: 64px 64px;
+    mask-image: linear-gradient(to right, black, transparent 88%);
+  }
+
+  .footer-shell {
+    width: min(calc(100% - 3rem), 80rem);
+    margin-inline: auto;
+    padding-block: clamp(2.75rem, 5vw, 4rem) 1.25rem;
+  }
+
+  .footer-main {
+    display: grid;
+    gap: 2.25rem;
+  }
+
+  .footer-identity {
+    min-width: 0;
+  }
+
+  .footer-kicker {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    color: #7dd3fc;
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    line-height: 1.5;
+    text-transform: uppercase;
+  }
+
+  .footer-kicker span {
+    width: 0.5rem;
+    height: 0.5rem;
+    flex: 0 0 auto;
+    border-radius: 999px;
+    background: #38bdf8;
+    box-shadow: 0 0 0.85rem rgb(56 189 248 / 65%);
+  }
+
+  .footer-tagline {
+    max-width: 34rem;
+    margin-top: 0.8rem;
+    font-size: clamp(1.75rem, 4.2vw, 3.35rem);
+    font-weight: 820;
+    letter-spacing: -0.055em;
+    line-height: 1;
+    text-wrap: balance;
+  }
+
+  .footer-social-list {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .footer-social-list a {
+    display: inline-flex;
+    min-height: 2.75rem;
+    align-items: center;
+    gap: 0.65rem;
+    border: 1px solid rgb(148 163 184 / 30%);
+    border-radius: 0.3rem;
+    padding: 0.7rem 0.9rem;
+    background: rgb(15 23 42 / 48%);
+    color: #e2e8f0;
+    font-size: 0.78rem;
+    font-weight: 750;
+    line-height: 1;
+    transition: border-color 180ms ease, background-color 180ms ease,
+      color 180ms ease;
+  }
+
+  .footer-social-list a:hover,
+  .footer-social-list a:focus-visible {
+    border-color: #7dd3fc;
+    background: rgb(14 165 233 / 12%);
+    color: #f8fafc;
+  }
+
+  .footer-social-list a :global(svg) {
+    width: 1rem;
+    height: 1rem;
+    flex: 0 0 auto;
+  }
+
+  .footer-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: clamp(2.25rem, 4vw, 3rem);
+    border-top: 1px solid rgb(148 163 184 / 22%);
+    padding-top: 1.1rem;
+    color: #94a3b8;
+    font-size: 0.72rem;
+    line-height: 1.5;
+  }
+
+  .back-to-top {
+    display: inline-flex;
+    min-height: 2.5rem;
+    align-items: center;
+    gap: 0.5rem;
+    color: #e2e8f0;
+    font-weight: 750;
+  }
+
+  .back-to-top span {
+    color: #7dd3fc;
+    font-size: 0.95rem;
+    transition: transform 180ms ease;
+  }
+
+  .back-to-top:hover span,
+  .back-to-top:focus-visible span {
+    transform: translateY(-0.16rem);
+  }
+
+  @media (min-width: 760px) {
+    .footer-main {
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: end;
+    }
+
+    .footer-social-list {
+      justify-content: flex-end;
+    }
+  }
+
+  @media (max-width: 460px) {
+    .footer-shell {
+      width: min(calc(100% - 2rem), 80rem);
+    }
+
+    .footer-social-list {
+      display: grid;
+      grid-template-columns: 1fr;
+    }
+
+    .footer-social-list a {
+      width: 100%;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .footer-social-list a,
+    .back-to-top span {
+      transition: none;
+    }
+  }
+</style>
